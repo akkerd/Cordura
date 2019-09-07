@@ -39,7 +39,7 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        onGround = Physics2D.OverlapCircle((Vector2)player.transform.position, collisionRadius, groundLayer);
+        onGround = Physics2D.OverlapCircle((Vector2)player.transform.position + bottomOffset, collisionRadius, groundLayer);
         onWall = Physics2D.OverlapCircle((Vector2)player.transform.position + rightOffset, collisionRadius, groundLayer)
             || Physics2D.OverlapCircle((Vector2)player.transform.position + leftOffset, collisionRadius, groundLayer);
 
