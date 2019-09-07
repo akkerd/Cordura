@@ -7,11 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField]
-    SO_ObjectRef playerReference;
+    SO_ObjectRef playerRef;
 
     private GameObject player;
-
     private PlayerCollision coll;
+
     [HideInInspector]
     private Rigidbody2D rb;
 
@@ -29,26 +29,33 @@ public class PlayerMovement : MonoBehaviour
     public bool wallGrab;
 
     // Use this for initialization
+    void Awake()
+    {
+        player = playerRef.getGameObject();
+    }
     void Start()
     {
-        player = playerReference.getObjectRef();
-        rb = GetComponent<Rigidbody2D>();
+        rb = player.GetComponent<Rigidbody2D>();
         coll = GetComponent<PlayerCollision>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        Vector2 dir = new Vector2(x, y);
-        Walk(dir);
-
-        if (Input.GetButtonDown("Jump"))
+        if (canMove)
         {
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            Debug.Log(x + " " + y);
+            Vector2 dir = new Vector2(x, y);
+            Walk(dir);
 
-            if (coll.onGround)
-                Jump(Vector2.up);
+            if (Input.GetButtonDown("Jump"))
+            {
+
+                if (coll.onGround)
+                    Jump(Vector2.up);
+            }
         }
     }
 

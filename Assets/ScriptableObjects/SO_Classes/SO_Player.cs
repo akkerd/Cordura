@@ -5,7 +5,7 @@ public class SO_ObjectRef : ScriptableObject
 {
     private GameObject objectRef;
 
-    public GameObject getObjectRef()
+    public GameObject getGameObject()
     {
         return objectRef;
     }
